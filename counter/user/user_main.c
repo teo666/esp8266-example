@@ -23,7 +23,6 @@
  */
 #include "ets_sys.h"
 #include "osapi.h"
-#include "spi_test.h"
 #include "user_interface.h"
 
 #if ((SPI_FLASH_SIZE_MAP == 0) || (SPI_FLASH_SIZE_MAP == 1))
