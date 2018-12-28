@@ -79,23 +79,15 @@ void ICACHE_FLASH_ATTR user_pre_init(void)
 }
 
 #define HOSTNAME "ESP8266"
-#define SSID "CasaSu"
-#define PASSWORD "passwordgazzosa"
+#define SSID "YOUR SSID"
+#define PASSWORD "YOUR PASSWORD"
+#define TIMEZONE (1) //-11 13
+#define SERVER0 "0.it.pool.ntp.org"
+#define SERVER1 "1.it.pool.ntp.org"
+#define SERVER2 "2.it.pool.ntp.org"
 
 struct station_config cfg;
 os_timer_t sntp_timer;
-
-void ICACHE_FLASH_ATTR
-print_mac(uint8 * mac){
-    uint8 i = 0;
-    for(i = 0; i < 6; i++){
-        os_printf("%02X" , mac[i]);
-        if(i != 5){
-            os_printf(":");
-        }
-    }
-    os_printf("\n");
-}
 
 
 void ICACHE_FLASH_ATTR
@@ -107,8 +99,7 @@ callback(void){
         os_printf("sntp: %d, %s \n", current_stamp , sntp_get_real_time(current_stamp));
         os_timer_arm(&sntp_timer, 10000, 0);
     } else {
-        //os_printf("riarmo\n");
-        os_timer_arm(&sntp_timer, 500, 0);
+        os_timer_arm(&sntp_timer, 1000, 0);
     }
 
 }
@@ -139,7 +130,7 @@ system_init_cb(void)
     ret = wifi_station_get_config_default(&cfg);
 
     if(ret){
-        os_printf("ssid : %0.32s\npassword : %0.64s\nbssid : " MACSTR "\n", cfg.ssid, cfg.password, MAC2STR(cfg.bssid));        print_mac(cfg.bssid);
+        os_printf("ssid : %0.32s\npassword : %0.64s\nbssid : " MACSTR "\n", cfg.ssid, cfg.password, MAC2STR(cfg.bssid));
     } else {
         os_printf("error\n");
     }
@@ -163,11 +154,11 @@ system_init_cb(void)
     /*wifi_station_disconnect();
     wifi_station_connect();*/
     
-    sntp_setservername(0, "0.it.pool.ntp.org");
-    sntp_setservername(1, "1.it.pool.ntp.org");
-    sntp_setservername(2, "2.it.pool.ntp.org");
+    sntp_setservername(0, SERVER0);
+    sntp_setservername(1, SERVER1);
+    sntp_setservername(2, SERVER2);
     sntp_stop();
-    if(sntp_set_timezone(1)){
+    if(sntp_set_timezone(TIMEZONE)){
         sntp_init();
     } else {
         os_printf("error timezone set");
