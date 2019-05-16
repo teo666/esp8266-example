@@ -3,8 +3,17 @@ NODEMCU NONOS
 ------------------
 esptool.py --chip esp8266 write_flash -fs 4MB 0x00000 eagle.flash.bin 0x10000 eagle.irom0text.bin 0x3FB000 blank.bin 0x3FC000 esp_init_data_default_v08.bin 0x3FE000 blank.bin
 
+1) scegliere eagle.flash.bin+eagle.irom0text.bin
+2) scegliere speed 80MHz
+3) scegliere SPI MODE DIO
+4) scegliere SPI SIZE 4096
 
 ------------------
 Generic esp8266 NONOS
 ------------------
 esptool.py --chip esp8266 write_flash -ff 40m -fs 1MB -fm dio 0x00000 eagle.flash.bin 0x10000 eagle.irom0text.bin 0xFB000 blank.bin 0xFC000 esp_init_data_default_v08.bin 0xFE000 blank.bin
+
+1) scegliere eagle.flash.bin+eagle.irom0text.bin
+2) scegliere speed 80MHz
+3) scegliere SPI MODE DIO
+4) scegliere SPI SIZE 1024
