@@ -24,6 +24,7 @@
 
 #ifndef __USER_CONFIG_H__
 #define __USER_CONFIG_H__
-
+    #include "driver/uart_register.h"
+    #include "driver/uart.h"
 #endif
 

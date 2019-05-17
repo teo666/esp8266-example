@@ -24,7 +24,7 @@
 #include "ets_sys.h"
 #include "osapi.h"
 #include "user_interface.h"
-#include "uart.h"
+#include "user_config.h"
 
 #if ((SPI_FLASH_SIZE_MAP == 0) || (SPI_FLASH_SIZE_MAP == 1))
 #error "The flash map is not supported"
@@ -80,8 +80,8 @@ void ICACHE_FLASH_ATTR user_pre_init(void)
 }
 
 void ICACHE_FLASH_ATTR
-init_cb(){
-    os_printf("This message is printed on uart interface \"1\"\n");
+system_init_cb(void)
+{
 }
 
 /**
@@ -91,9 +91,7 @@ init_cb(){
 void ICACHE_FLASH_ATTR
 user_init(void)
 {
-    //set print port on uart interface 1
-    uart_init(BIT_RATE_115200, BIT_RATE_115200);
-    UART_SetPrintPort(UART1);
-    system_init_done_cb(init_cb);
+    uart_init(115200,115200);
+    system_init_done_cb(system_init_cb);
 }
 
