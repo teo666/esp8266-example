@@ -81,8 +81,8 @@ void ICACHE_FLASH_ATTR user_pre_init(void)
 }
 
 #define HOSTNAME "ESP8266"
-#define SSID "CasaSu"
-#define PASSWORD "passwordgazzosa"
+#define SSID "yourownssid"
+#define PASSWORD "yourownpassword"
 
 #define REMOTE_PORT 2000;
 #define REMOTE_IP {192,168,0,12}
